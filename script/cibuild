@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUG" ] || set -x
+
+export MIX_ENV="test"
+
+script/bootstrap
+
+echo "==> Linting files…"
+mix format --check-formatted
+
+echo "==> Running tests…"
+mix test
